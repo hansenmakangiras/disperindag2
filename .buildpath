@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry external="true" kind="lib" path="D:/Tutorial/Yii/php-cs-fixer.phar"/>
+	<buildpathentry external="true" kind="lib" path="C:/xampp/php/pear"/>
+	<buildpathentry kind="src" path=""/>
+	<buildpathentry external="true" kind="lib" path="D:/Webserver/Web/yii-1.1.16/framework"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+</buildpath>

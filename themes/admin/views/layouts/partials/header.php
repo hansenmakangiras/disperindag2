@@ -148,13 +148,13 @@
             </a>
             <ul>
                 <li>
-                    <a href="/admin/users/index">
+                    <a href="/admin/user/index">
                         <i class="entypo-users"></i>
                         <span>Semua Pengguna</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/admin/users/create">
+                    <a href="/admin/user/create">
                         <i class="entypo-user-add"></i>
                         <span>Tambah Baru</span>
                     </a>

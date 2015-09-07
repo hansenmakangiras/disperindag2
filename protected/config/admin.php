@@ -11,7 +11,8 @@ return CMap::mergeArray(
                     'showScriptName' => false,
                     'rules' => array(
                         //'site/login'=>'/',
-                        'admin' => 'site/index',
+                        'admin' => 'admin/site/index',
+                        'admin/user' => 'admin/user/index',
                         //'admin/berita/index' => 'admin/berita',
 
                         'admin/<_c>' => '<_c>',

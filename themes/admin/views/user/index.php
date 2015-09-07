@@ -1,7 +1,4 @@
 <ol class="breadcrumb bc-3">
-    <?php $this->breadcrumbs=array(
-        UserModule::t("Users"),
-    );?>
     <li>
         <a href="/admin">Beranda</a>
     </li>
@@ -10,18 +7,6 @@
         <strong>Pengguna</strong>
     </li>
 </ol>
-<?php
-$this->breadcrumbs=array(
-    UserModule::t("Users"),
-);
-if(UserModule::isAdmin()) {
-    $this->layout='//layouts/column2';
-    $this->menu=array(
-        array('label'=>UserModule::t('Manage Users'), 'url'=>array('/user/admin')),
-        array('label'=>UserModule::t('Manage Profile Field'), 'url'=>array('profileField/admin')),
-    );
-}
-?>
 <h2>Pengguna</h2>
 <br />
 

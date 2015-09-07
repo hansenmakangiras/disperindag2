@@ -34,6 +34,19 @@ class UserController extends AdminController
         );
     }
 
+    public function accessRules()
+    {
+        return array(
+            array('allow',  // allow all users to perform 'index' and 'view' actions
+                'actions'=>array('index','view'),
+                'users'=>array('*'),
+            ),
+            array('deny',  // deny all users
+                'users'=>array('*'),
+            ),
+        );
+    }
+
 //    public function accessRules()
 //    {
 //        return array(
@@ -57,25 +70,18 @@ class UserController extends AdminController
 
     public function actionIndex()
     {
-        $models = array();
+        $dataProvider=new CActiveDataProvider('User', array(
+            'criteria'=>array(
+                'condition'=>'status>'.User::STATUS_BANNED,
+            ),
 
-//        if(!empty($_POST['User'])){
-//            foreach ($_POST['User'] as $postData) {
-//                $model = new User;
-//                $model->setAttributes($postData);
-//                if($model->validate())
-//                    $models[] = $model;
-//            }
-//
-//        }
-//        if(!empty($models)){
-//
-//        }else{
-//            $models[] = new User();
-//        }
+            'pagination'=>array(
+                'pageSize'=>Yii::app()->controller->module->user_page_size,
+            ),
+        ));
 
-        $this->render("index", array(
-            'models'=>$models,
+        $this->renderPartial('index',array(
+            'dataProvider'=>$dataProvider,
         ));
     }
 
@@ -84,10 +90,11 @@ class UserController extends AdminController
      *
      * @param int $id the ID of the model to be displayed
      */
-    public function actionView($id)
+    public function actionView()
     {
-        $this->render('view', array(
-            'model' => $this->loadModel($id),
+        $model = $this->loadModel();
+        $this->render('view',array(
+            'model'=>$model,
         ));
     }
 
@@ -208,14 +215,33 @@ class UserController extends AdminController
      *
      * @throws CHttpException
      */
-    public function loadModel($id)
+    public function loadModel()
     {
-        $model = User::model()->findByPk($id);
-        if ($model === null) {
-            throw new CHttpException(404, 'The requested page does not exist.');
+        if($this->_model===null)
+        {
+            if(isset($_GET['id']))
+                $this->_model=User::model()->findbyPk($_GET['id']);
+            if($this->_model===null)
+                throw new CHttpException(404,'The requested page does not exist.');
         }
+        return $this->_model;
+    }
 
-        return $model;
+    /**
+     * Returns the data model based on the primary key given in the GET variable.
+     * If the data model is not found, an HTTP exception will be raised.
+     * @param integer the primary key value. Defaults to null, meaning using the 'id' GET variable
+     */
+    public function loadUser($id=null)
+    {
+        if($this->_model===null)
+        {
+            if($id!==null || isset($_GET['id']))
+                $this->_model=User::model()->findbyPk($id!==null ? $id : $_GET['id']);
+            if($this->_model===null)
+                throw new CHttpException(404,'The requested page does not exist.');
+        }
+        return $this->_model;
     }
 
     /**

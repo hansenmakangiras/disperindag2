@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class UserController extends Controller
+class UserController extends AdminController
 {
 
     /**
@@ -59,20 +59,20 @@ class UserController extends Controller
     {
         $models = array();
 
-        if(!empty($_POST['User'])){
-            foreach ($_POST['User'] as $postData) {
-                $model = new User;
-                $model->setAttributes($postData);
-                if($model->validate())
-                    $models[] = $model;
-            }
-
-        }
-        if(!empty($models)){
-
-        }else{
-            $models[] = new User();
-        }
+//        if(!empty($_POST['User'])){
+//            foreach ($_POST['User'] as $postData) {
+//                $model = new User;
+//                $model->setAttributes($postData);
+//                if($model->validate())
+//                    $models[] = $model;
+//            }
+//
+//        }
+//        if(!empty($models)){
+//
+//        }else{
+//            $models[] = new User();
+//        }
 
         $this->render("index", array(
             'models'=>$models,

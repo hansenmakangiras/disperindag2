@@ -1,7 +1,4 @@
 <ol class="breadcrumb bc-3">
-    <?php $this->breadcrumbs=array(
-        UserModule::t("Users"),
-    );?>
     <li>
         <a href="/admin">Beranda</a>
     </li>
@@ -10,18 +7,6 @@
         <strong>Pengguna</strong>
     </li>
 </ol>
-<?php
-$this->breadcrumbs=array(
-    UserModule::t("Users"),
-);
-if(UserModule::isAdmin()) {
-    $this->layout='//layouts/column2';
-    $this->menu=array(
-        array('label'=>UserModule::t('Manage Users'), 'url'=>array('/user/admin')),
-        array('label'=>UserModule::t('Manage Profile Field'), 'url'=>array('profileField/admin')),
-    );
-}
-?>
 <h2>Pengguna</h2>
 <br />
 
@@ -36,31 +21,31 @@ if(UserModule::isAdmin()) {
 
     <table class="table table-bordered table-responsive">
         <thead>
-            <tr>
-                <th>#</th>
-                <th>Nama Lengkap</th>
-                <th>Nama Pengguna</th>
-                <th>Kata Sandi</th>
-                <th>Aksi</th>
-            </tr>
+        <tr>
+            <th>#</th>
+            <th>Nama Lengkap</th>
+            <th>Nama Pengguna</th>
+            <th>Kata Sandi</th>
+            <th>Aksi</th>
+        </tr>
         </thead>
 
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Gifa Eriyanto</td>
-                <td>Abu Sulaim</td>
-                <td>***********</td>
-                <td><a href="/admin/users?hapus" data-toggle="modal" data-target="#modal-hapus" class="bg"><i class="fa fa-trash-o"></i> &nbsp;Hapus</a></td>
-            </tr>
+        <tr>
+            <td>1</td>
+            <td>Gifa Eriyanto</td>
+            <td>Abu Sulaim</td>
+            <td>***********</td>
+            <td><a href="/admin/users?hapus" data-toggle="modal" data-target="#modal-hapus" class="bg"><i class="fa fa-trash-o"></i> &nbsp;Hapus</a></td>
+        </tr>
 
-            <tr>
-                <td>2</td>
-                <td>Gifa Eriyanto</td>
-                <td>Abu Sulaim</td>
-                <td>***********</td>
-                <td><a href="#" data-toggle="modal" data-target="#modal-hapus" class="bg"><i class="fa fa-trash-o"></i> &nbsp;Hapus</a></td>
-            </tr>
+        <tr>
+            <td>2</td>
+            <td>Gifa Eriyanto</td>
+            <td>Abu Sulaim</td>
+            <td>***********</td>
+            <td><a href="#" data-toggle="modal" data-target="#modal-hapus" class="bg"><i class="fa fa-trash-o"></i> &nbsp;Hapus</a></td>
+        </tr>
         </tbody>
     </table>
 </div>

@@ -33,13 +33,14 @@ return array(
 	// application components
 	'components'=>array(
 		'metadata'=>array('class'=>'Metadata'),
-		        'mobileDetect' => array(
-		            'class' => 'ext.EMobileDetect.MobileDetect'
-		        ),
+        'mobileDetect' => array(
+            'class' => 'ext.EMobileDetect.MobileDetect'
+        ),
 
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
+            'loginUrl' => array('site/login'),
 		),
 		// uncomment the following to enable URLs in path-format
 		'urlManager'=>array(

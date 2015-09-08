@@ -27,6 +27,33 @@ class Controller extends CController
 	 * If given layout is overriden, use it instead of protected folder one. Else, use protected folder one.
 	 * @see CController::beforeAction()
 	 */
+    public function createModal($id = "", $title = "", $message = "",$button1 = "Kembali",$button2 = "",$button3 = ""){
+        echo "<div class='modal fade' id='$id'>";
+            echo "<div class='modal-dialog'>";
+                echo "<div class='modal-content'>";
+                    echo "<div class='modal-header'>";
+                        echo "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>";
+                        echo "<h4 class='modal-title'>$title</h4>";
+                    echo "</div>";
+
+                        echo "<div class ='modal-body'>";
+                            if(Yii::app()->user->hasFlash($message)){
+                                Yii::app()->user->getFlash($message);
+                            }else{
+                                echo "";
+                            }
+                        echo "</div>";
+
+                    echo "<div class='modal-footer no-margin'>";
+                        echo "<button type='button' class='btn btn-default' data-dismiss='modal'>$button1</button>";
+                        echo "<button type='button' class='btn btn-danger'>$button2</button>";
+                        if(!empty($button3))
+                            echo "<button type='button' class='btn btn-danger'>$button3</button>";
+                    echo "</div>";
+                echo "</div>";
+            echo "</div>";
+        echo "</div>";
+    }
 	public function beforeAction($action)
 	{
 	    // If application is using a theme, replace default layout controller variable that start with '//layouts/' with a theme link

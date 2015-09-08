@@ -5,7 +5,7 @@ return array(
     //'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
     // uncomment the following lines to use a MySQL database
 
-    'connectionString' => 'mysql:host=localhost;dbname=disperindag',
+    'connectionString' => 'mysql:host=127.0.0.1;dbname=disperindag',
     'emulatePrepare' => true,
     'username' => 'root',
     'password' => 'BlackID85',

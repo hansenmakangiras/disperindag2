@@ -10,10 +10,8 @@ return CMap::mergeArray(
                 'showScriptName' => false,
                 'rules' => array(
                     //'site/login'=>'/',
-                    'admin' => 'admin/site/index',
-                    //'admin/user' => 'admin/user/index',
-                    //'admin/berita/index' => 'admin/berita',
-
+                    'admin' => 'site/index',
+                    'admin/user' => 'user/index',
                     'admin/<_c>' => '<_c>',
                     'admin/<_c>/<_a>' => '<_c>/<_a>',
                 ),

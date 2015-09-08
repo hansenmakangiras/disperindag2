@@ -101,9 +101,8 @@ class UserController extends AdminController
         $pesan = "";
         if (isset($_POST['User'])) {
             $model->attributes = $_POST['User'];
-
             $model->username = $_POST['User']['username'];
-            $model->password = $_POST['User']['password'];
+            $model->password = md5($_POST['User']['password']);
             $model->namalengkap = $_POST['User']['namalengkap'];
             $token = Yii::app()->request->getCsrfToken();
             $salt = md5(($_POST['User']['username']));
@@ -111,28 +110,16 @@ class UserController extends AdminController
             $model->salt = $salt;
             $model->is_register = 1;
             $model->is_aktif = 1;
-
-            if ($model->save()) {
-                $this->redirect('/admin/users');
-//                    $pesan = "Sukses";
-//                    $mail = new YiiMailer();
-//                    $mail->SetFrom('info@disperindag.com', 'Disperindag');
-//                    $mail->Subject = "Registrasi Akun";
-//                    $msg = $this->renderPartial('//mailtemplate/registrasi', array(
-//                        'name'=>$_POST['User']['username'],
-//                        'token'=>$token,
-//                    ), true, true);
-//                    $mail->MsgHTML($msg);
-//                    $mail->AddAddress($model->email);
-//
-//                    if ($mail->send()) {
-//                        $pesan = "Permintaan pendaftaran anda telah kami terima. Silahkan cek email anda untuk melanjutkan proses pendaftaran.";
-//                        $model->unsetAttributes();
-//                        $this->redirect('/admin/users');
-//                    }else{
-//                        echo $mail->ErrorInfo;
-//                    }
+            $save = $model->save();
+            if ($save) {
+                //$this->redirect('/admin/users');
+                Yii::app()->user->setFlash('pesan',"Data berhasil disimpan.");
+                $pesan = "Sukses";
+            }else{
+                Yii::app()->user->setFlash('pesan',"Data Gagal disimpan.");
+                $pesan = "Gagal";
             }
+            //echo $pesan;
         }
 
         $this->render('create', array(

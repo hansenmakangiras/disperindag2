@@ -1,5 +1,5 @@
 <?php $form = $this->beginWidget('CActiveForm', array(
-    'id' => 'form-login',
+    'id' => 'register-form',
     'enableAjaxValidation' => true,
     'focus' => array($model, 'namalengkap'),
     'htmlOptions' => array(

@@ -92,40 +92,117 @@ class UserController extends AdminController
     }
 
     /**
+     * Returns the data model based on the primary key given in the GET variable.
+     * If the data model is not found, an HTTP exception will be raised.
+     *
+     * @param int $id the ID of the model to be loaded
+     *
+     * @return User the loaded model
+     *
+     * @throws CHttpException
+     */
+    public function loadModel($id)
+    {
+        $model = User::model()->findByPk($id);
+        if ($model === null) {
+            throw new CHttpException(404, 'The requested page does not exist.');
+        }
+
+        return $model;
+    }
+
+    /**
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
+    public function actionRegister(){
+        $model = new Users;
+        $pesan = "";
+
+        $this->performAjaxValidation($model);
+
+        if(Yii::app()->user->id){
+            $this->redirect('/login');
+        }else{
+            if (isset($_POST['User'])) {
+                $model->attributes = $_POST['User'];
+                if($model->validate()){
+
+                }
+                $model->username = $_POST['User']['username'];
+                $model->password = md5($_POST['User']['password']);
+                $model->namalengkap = $_POST['User']['namalengkap'];
+                $token = Yii::app()->request->getCsrfToken();
+                $salt = md5(($_POST['User']['username']));
+                $model->token = $token;
+                $model->salt = $salt;
+                $save = $model->save(false);
+
+                $existUser = User::model()->findByAttributes(array('email'=>$_POST['email']));
+                if($existUser->email == $_POST['email']){
+                    Yii::app()->user->setFlash('Sukses',"Data berhasil disimpan.");
+                }
+
+                if ($save) {
+                    //$this->redirect('/admin/users');
+                    Yii::app()->user->setFlash('Sukses',"Data berhasil disimpan.");
+                    $pesan = "Sukses";
+                }else{
+                    Yii::app()->user->setFlash('Gagal',"Data Gagal disimpan.");
+                    $pesan = "Gagal";
+                }
+            }
+            $this->render('create', array(
+                'model' => $model,
+                'pesan' => $pesan,
+            ));
+        }
+    }
+
     public function actionCreate()
     {
         $model = new User;
         $pesan = "";
-        if (isset($_POST['User'])) {
-            $model->attributes = $_POST['User'];
-            $model->username = $_POST['User']['username'];
-            $model->password = md5($_POST['User']['password']);
-            $model->namalengkap = $_POST['User']['namalengkap'];
-            $token = Yii::app()->request->getCsrfToken();
-            $salt = md5(($_POST['User']['username']));
-            $model->token = $token;
-            $model->salt = $salt;
-            $model->is_register = 1;
-            $model->is_aktif = 1;
-            $save = $model->save();
-            if ($save) {
-                //$this->redirect('/admin/users');
-                Yii::app()->user->setFlash('pesan',"Data berhasil disimpan.");
-                $pesan = "Sukses";
-            }else{
-                Yii::app()->user->setFlash('pesan',"Data Gagal disimpan.");
-                $pesan = "Gagal";
-            }
-            //echo $pesan;
-        }
 
-        $this->render('create', array(
-            'model' => $model,
-            'pesan' => $pesan,
-        ));
+        $this->performAjaxValidation($model);
+
+        if(Yii::app()->user->id){
+            $this->redirect('/login');
+        }else{
+            if (isset($_POST['User'])) {
+                $model->attributes = $_POST['User'];
+                if($model->validate()){
+
+                }
+                $model->username = $_POST['User']['username'];
+                $model->password = md5($_POST['User']['password']);
+                $model->namalengkap = $_POST['User']['namalengkap'];
+                $token = Yii::app()->request->getCsrfToken();
+                $salt = md5(($_POST['User']['username']));
+                $model->token = $token;
+                $model->salt = $salt;
+                $save = $model->save(false);
+
+                $existUser = User::model()->findByAttributes(array('email'=>$_POST['email']));
+                if($existUser->email == $_POST['email']){
+                    Yii::app()->user->setFlash('Sukses',"Data berhasil disimpan.");
+                }
+
+
+                if ($save) {
+                    //$this->redirect('/admin/users');
+                    Yii::app()->user->setFlash('Sukses',"Data berhasil disimpan.");
+                    $pesan = "Sukses";
+                }else{
+                    Yii::app()->user->setFlash('Gagal',"Data Gagal disimpan.");
+                    $pesan = "Gagal";
+                }
+            }
+            $this->render('create', array(
+                'model' => $model,
+                'pesan' => $pesan,
+            ));
+        }
     }
 
     /**
@@ -183,26 +260,6 @@ class UserController extends AdminController
         $this->render('admin', array(
             'model' => $model,
         ));
-    }
-
-    /**
-     * Returns the data model based on the primary key given in the GET variable.
-     * If the data model is not found, an HTTP exception will be raised.
-     *
-     * @param int $id the ID of the model to be loaded
-     *
-     * @return User the loaded model
-     *
-     * @throws CHttpException
-     */
-    public function loadModel($id)
-    {
-        $model = User::model()->findByPk($id);
-        if ($model === null) {
-            throw new CHttpException(404, 'The requested page does not exist.');
-        }
-
-        return $model;
     }
 
     /**

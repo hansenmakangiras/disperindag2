@@ -10,12 +10,21 @@
 
 <h2>Tambah Pengguna</h2>
 <br />
-    <?php if(Yii::app()->user->hasFlash('pesan')): ?>
-        <div class="alert alert-danger fade in">
+    <?php if($pesan = "Sukses") { ?>
+    <?php if(Yii::app()->user->hasFlash('Sukses')): ?>
+        <div class="alert alert-success fade in">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong><?= !empty($pesan) ? $pesan : ""?> !</strong> <?php echo Yii::app()->user->getFlash('pesan'); ?>
+            <strong><?= !empty($pesan) ? $pesan : ""?> !</strong> <?php echo Yii::app()->user->getFlash('Sukses'); ?>
         </div>
     <?php endif; ?>
+    <?php }else{?>
+        <?php if(Yii::app()->user->hasFlash('Gagal')): ?>
+        <div class="alert alert-danger fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong><?= !empty($pesan) ? $pesan : ""?> !</strong> <?php echo Yii::app()->user->getFlash('Gagal'); ?>
+        </div>
+        <?php endif; ?>
+    <?php }?>
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-primary" data-collapsed="0">

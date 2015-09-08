@@ -154,7 +154,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/admin/user/create">
+                    <a href="/admin/user/register">
                         <i class="entypo-user-add"></i>
                         <span>Tambah Baru</span>
                     </a>

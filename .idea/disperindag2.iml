@@ -19,5 +19,7 @@
         </SOURCES>
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Node.js v0.12.4 Core Modules" level="application" />
+    <orderEntry type="library" name="YUI-3.10.0" level="application" />
   </component>
 </module>
